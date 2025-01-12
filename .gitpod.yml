@@ -1,0 +1,8 @@
+image:
+  file: .gitpod.Dockerfile
+
+jetbrains:
+  intellij:
+    vmoptions: '-Xmx4g'
+    prebuilds:
+      version: stable

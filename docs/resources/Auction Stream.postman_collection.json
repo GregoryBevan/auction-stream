@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "4d1d4512-722c-4dc7-bc75-b0a1e232d0b1",
+		"name": "Auction Stream",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2435879"
+	},
+	"item": [
+		{
+			"name": "Create a new auction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"item\": {\n        \"name\": \"Jimi Hendrix's Left-Handed Guitar, Played with His Teeth\",\n        \"description\": \"A rare, left-handed Fender Stratocaster allegedly owned by Jimi Hendrix himself. This guitar is famous for being one of the instruments he famously played with his teeth during live performances. It comes with a certificate of authenticity, a signature from Hendrix’s personal roadie, and a small swatch of the shirt Hendrix wore during his legendary Woodstock performance.\",\n        \"startingPrice\": 1000000.00\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auctions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auctions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start an auction",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/auctions/01948a7b-af75-7c7d-abb6-c348cae9c0fd/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auctions",
+						"01948a7b-af75-7c7d-abb6-c348cae9c0fd",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place bid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bidder\": \"Raise Handerson\",\n    \"amount\": 100023446.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auctions/01948a7b-af75-7c7d-abb6-c348cae9c0fd/bid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auctions",
+						"01948a7b-af75-7c7d-abb6-c348cae9c0fd",
+						"bid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "End an auction",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/auctions/01948a7b-af75-7c7d-abb6-c348cae9c0fd/end",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auctions",
+						"01948a7b-af75-7c7d-abb6-c348cae9c0fd",
+						"end"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an auction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/auctions/01948a7b-af75-7c7d-abb6-c348cae9c0fd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auctions",
+						"01948a7b-af75-7c7d-abb6-c348cae9c0fd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all auctions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/auctions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auctions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
