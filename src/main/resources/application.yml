@@ -1,3 +1,15 @@
 spring:
   application:
     name: auction-stream
+  r2dbc:
+    url: r2dbc:postgresql://${POSTGRESQL_ADDON_HOST:localhost}:${POSTGRESQL_ADDON_PORT:5432}/${POSTGRESQL_ADDON_DB:auction-stream}
+    username: ${POSTGRESQL_ADDON_USER:admin_user}
+    password: ${POSTGRESQL_ADDON_PASSWORD:guess-what}
+    pool:
+      initial-size: 10
+      max-size: 50
+  liquibase:
+    change-log: classpath:db/changelog/db-changelog.sql
+    url: jdbc:postgresql://${POSTGRESQL_ADDON_HOST:localhost}:${POSTGRESQL_ADDON_PORT:5432}/${POSTGRESQL_ADDON_DB:auction-stream}
+    user: ${POSTGRESQL_ADDON_USER:admin_user}
+    password: ${POSTGRESQL_ADDON_PASSWORD:guess-what}
