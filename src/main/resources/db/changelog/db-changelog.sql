@@ -1,4 +1,4 @@
---liquibase formatted sql        
+--liquibase formatted sql
 -- Auction event log
 
 -- changeset me.elgregos:create-auction-event-table

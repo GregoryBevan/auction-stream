@@ -1,15 +1,12 @@
 package me.elgregos.auctionstream.auction.api
 
 import jakarta.validation.Valid
-import org.springframework.web.bind.annotation.*
+import me.elgregos.auctionstream.auction.api.dto.AuctionDTO
 import me.elgregos.auctionstream.auction.application.AuctionCommand
 import me.elgregos.auctionstream.auction.application.AuctionCommandHandler
 import me.elgregos.auctionstream.auction.application.AuctionProjectionService
-import me.elgregos.auctionstream.auction.domain.entity.Auction
-import me.elgregos.reakteves.libs.nowUTC
-import me.elgregos.reakteves.libs.uuidV5
-import me.elgregos.reakteves.libs.uuidV7
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
 import reactor.kotlin.core.publisher.toMono
 import java.util.*
 
@@ -32,8 +29,8 @@ class AuctionController(
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun createAuction() =
-        auctionCommandHandler.handle(AuctionCommand.CreateAuction(Auction(id = uuidV7(), createdAt = nowUTC(), createdBy = uuidV5("creator"))))
+    fun createAuction(@RequestBody auctionDTO: AuctionDTO) =
+        auctionCommandHandler.handle(AuctionCommand.CreateAuction(auctionDTO.toAuction()))
             .toMono()
             .map { mapOf(Pair("auctionId", it.aggregateId)) }
 
