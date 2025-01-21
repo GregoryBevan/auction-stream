@@ -5,6 +5,6 @@ import java.time.LocalDateTime
 data class Bid(
     val bidder: String,
     val amount: Double,
-    val timestamp: LocalDateTime,
+    val placedAt: LocalDateTime,
     val bidStatus: BidStatus
 )
