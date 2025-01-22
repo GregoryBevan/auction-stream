@@ -3,6 +3,7 @@ plugins {
 	kotlin("plugin.spring") version "1.9.25"
 	id("org.springframework.boot") version "3.4.1"
 	id("io.spring.dependency-management") version "1.1.7"
+	id("me.elgregos.reakteves.cli") version "1.4.6"
 }
 
 group = "me.elgregos"
@@ -19,6 +20,7 @@ repositories {
 }
 
 dependencies {
+	implementation("me.elgregos:reakt-eves:1.4.6")
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
