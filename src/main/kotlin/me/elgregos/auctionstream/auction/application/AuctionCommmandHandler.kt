@@ -3,6 +3,7 @@ package me.elgregos.auctionstream.auction.application
 import me.elgregos.auctionstream.auction.application.AuctionCommand.*
 import me.elgregos.auctionstream.auction.domain.event.AuctionAggregate
 import me.elgregos.auctionstream.auction.domain.event.AuctionEvent
+import me.elgregos.auctionstream.auction.infrastructure.event.AuctionEventProducer
 import me.elgregos.reakteves.domain.event.EventStore
 import me.elgregos.reakteves.infrastructure.event.ReactorEventPublisher
 import org.springframework.stereotype.Service
@@ -11,7 +12,8 @@ import java.util.*
 @Service
 class AuctionCommandHandler(
     val auctionEventStore: EventStore<AuctionEvent, UUID, UUID>,
-    val auctionEventPublisher: ReactorEventPublisher<UUID, UUID>
+    val auctionEventPublisher: ReactorEventPublisher<UUID, UUID>,
+    val auctionEventProducer: AuctionEventProducer
 ) {
 
     fun handle(auctionCommand: AuctionCommand) =
@@ -23,6 +25,8 @@ class AuctionCommandHandler(
         }
             .flatMap { auctionEventStore.save(it) }
             .doOnNext { auctionEventPublisher.publish(it) }
+            .flatMap { auctionEventProducer.produce(it) }
+
 
     private fun createAuction(auctionCommand: CreateAuction) =
         AuctionAggregate(auctionCommand.auctionId, auctionEventStore)

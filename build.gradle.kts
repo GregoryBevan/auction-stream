@@ -21,6 +21,8 @@ repositories {
 
 dependencies {
 	implementation("me.elgregos:reakt-eves:1.4.6")
+	implementation("org.springframework.kafka:spring-kafka")
+	implementation("io.projectreactor.kafka:reactor-kafka")
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")

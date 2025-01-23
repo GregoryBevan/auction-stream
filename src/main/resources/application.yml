@@ -13,3 +13,18 @@ spring:
     url: jdbc:postgresql://${POSTGRESQL_ADDON_HOST:localhost}:${POSTGRESQL_ADDON_PORT:5432}/${POSTGRESQL_ADDON_DB:auction-stream}
     user: ${POSTGRESQL_ADDON_USER:admin_user}
     password: ${POSTGRESQL_ADDON_PASSWORD:guess-what}
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: latest
+      enable-auto-commit: false
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: auction-stream-group
+      client-id: auction-stream-client-50f4d95e-90b0-4df4-966c-da5062d2c00f
+      properties:
+        spring.json.trusted.packages: me.elgregos.auctionstream.auction.domain.event
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      allow.auto.create.topics: true
