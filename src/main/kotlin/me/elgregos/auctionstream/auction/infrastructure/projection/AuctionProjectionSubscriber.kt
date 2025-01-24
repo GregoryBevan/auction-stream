@@ -34,6 +34,7 @@ class AuctionProjectionSubscriber(
             .flatMap {
                 when (it) {
                     is AuctionCreated -> createAuction(it)
+                    is AuctionStarted, is BidPlaced, is AuctionEnded -> updateAuction(it)
                 }
             }
             .doOnError { error -> logger.error(error) { "An error occurred while processing event" } }
@@ -42,4 +43,8 @@ class AuctionProjectionSubscriber(
 
     private fun createAuction(event: AuctionCreated) =
         auctionProjectionStore.insert(fromJson(event.event))
+
+    private fun updateAuction(event: AuctionEvent) =
+        auctionProjectionStore.find(event.aggregateId)
+            .flatMap { auctionProjectionStore.update(mergeJsonPatch(it, event)) }
 }
